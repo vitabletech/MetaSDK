@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 // Read package.json version dynamically
-const pkgPath = join(process.cwd(), '../package.json');
+const pkgPath = join(process.cwd(), 'package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 
 // https://vitepress.dev/reference/site-config

@@ -23,8 +23,8 @@
     "lint": "tsc --noEmit",
     "lint:fix": "eslint --fix . --ext .js,.ts",
     "prepare": "husky",
-    "docs:dev": "cd docs && npm run docs:dev",
-    "docs:build": "cd docs && npm run docs:build"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs"
   },
   "description": "A highly scalable, modern, and generic Node.js SDK for interacting with the Meta Graph API (Facebook and Instagram).",
   "keywords": [
