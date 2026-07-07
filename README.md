@@ -13,7 +13,7 @@ A highly scalable, modern, and generic Node.js SDK for interacting with the Meta
 ## Installation
 
 ```bash
-npm install meta-sdk
+npm install @vitabletech/meta-sdk
 ```
 
 ## Quick Start

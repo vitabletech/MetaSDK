@@ -1,6 +1,6 @@
 {
   "name": "@vitabletech/meta-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -46,7 +46,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/vitabletech/Meta-SDK#readme",
+  "homepage": "https://metasdk.vitabletech.in",
   "bugs": {
     "url": "https://github.com/vitabletech/Meta-SDK/issues"
   },
@@ -55,7 +55,7 @@
     "url": "git+https://github.com/vitabletech/Meta-SDK.git"
   },
   "author": {
-    "name": "Mayank Singh Kushwah",
+    "name": "Mayank Singh Rajawat",
     "url": "https://vitabletech.in"
   },
   "license": "ISC",
