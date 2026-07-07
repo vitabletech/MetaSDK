@@ -1,0 +1,88 @@
+/* Custom VitePress Theme Styles for Meta-SDK */
+
+:root {
+  /* Brand colors matching Meta standard blue & modern gradient */
+  --vp-c-brand: #0064e0;
+  --vp-c-brand-light: #4795ff;
+  --vp-c-brand-lighter: #8cbaff;
+  --vp-c-brand-dark: #004fb3;
+  --vp-c-brand-darker: #003a85;
+
+  /* Gradient text for the main Hero name (Meta Blue to Instagram Pink) */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #0064e0 0%,
+    #e4405f 100%
+  );
+
+  /* Glowing background behind the hero image */
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(0, 100, 224, 0.4) 0%,
+    rgba(228, 64, 95, 0.4) 100%
+  );
+  --vp-home-hero-image-filter: blur(60px);
+}
+
+/* Subtle gradient background for the entire page body */
+body {
+  background-image:
+    radial-gradient(
+      circle at top left,
+      rgba(0, 100, 224, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(228, 64, 95, 0.08) 0%,
+      transparent 50%
+    );
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* Dark mode overrides */
+.dark {
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #3b82f6 0%,
+    #fccc63 50%,
+    #e4405f 100%
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(228, 64, 95, 0.3) 100%
+  );
+}
+
+.dark body {
+  background-image:
+    radial-gradient(
+      circle at top left,
+      rgba(0, 100, 224, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(228, 64, 95, 0.15) 0%,
+      transparent 50%
+    );
+}
+
+/* Make action buttons pop */
+.VPButton.brand {
+  background: linear-gradient(135deg, #0064e0 0%, #e4405f 100%);
+  border-color: transparent;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.VPButton.brand:hover {
+  background: linear-gradient(135deg, #0056c2 0%, #d62e4f 100%);
+  opacity: 0.95;
+  transform: translateY(-2px);
+  border-color: transparent;
+}
