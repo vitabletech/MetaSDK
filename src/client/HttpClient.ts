@@ -4,7 +4,21 @@ import { RateLimiter } from './RateLimiter';
 
 export interface IHttpClient {
   get<T>(path: string, params?: Record<string, any>): Promise<T>;
-  post<T>(path: string, body?: Record<string, any>, params?: Record<string, any>): Promise<T>;
+  post<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T>;
+  put<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T>;
+  patch<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T>;
   delete<T>(path: string, params?: Record<string, any>): Promise<T>;
 }
 
@@ -19,7 +33,7 @@ export class HttpClient implements IHttpClient {
   }
 
   private async request<T>(
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     path: string,
     params: Record<string, any> = {},
     body?: Record<string, any>,
@@ -47,7 +61,7 @@ export class HttpClient implements IHttpClient {
       });
       url = `${this.baseUrl}/${this.config.version}${normalizedPath}?${queryParams.toString()}`;
     }
-    
+
     if (this.config.debug) {
       console.log(`[Meta-SDK] ${method} ${url}`);
     }
@@ -60,13 +74,13 @@ export class HttpClient implements IHttpClient {
       },
     };
 
-    if (body && (method === 'POST' || method === 'PUT')) {
+    if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
       options.body = JSON.stringify(body);
     }
 
     try {
       const response = await fetch(url, options);
-      
+
       // Update rate limits from headers
       this.rateLimiter.updateLimits(response.headers);
 
@@ -75,7 +89,9 @@ export class HttpClient implements IHttpClient {
       if (!response.ok) {
         if (response.status === 429 && retryCount < this.maxRetries) {
           if (this.config.debug) {
-            console.log(`[Meta-SDK] Rate limited on ${path}. Retrying (${retryCount + 1}/${this.maxRetries})...`);
+            console.log(
+              `[Meta-SDK] Rate limited on ${path}. Retrying (${retryCount + 1}/${this.maxRetries})...`
+            );
           }
           await this.rateLimiter.backoff(retryCount);
           return this.request<T>(method, path, params, body, retryCount + 1);
@@ -105,11 +121,34 @@ export class HttpClient implements IHttpClient {
     return this.request<T>('GET', path, params);
   }
 
-  public async post<T>(path: string, body?: Record<string, any>, params?: Record<string, any>): Promise<T> {
+  public async post<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T> {
     return this.request<T>('POST', path, params, body);
   }
 
-  public async delete<T>(path: string, params?: Record<string, any>): Promise<T> {
+  public async put<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T> {
+    return this.request<T>('PUT', path, params, body);
+  }
+
+  public async patch<T>(
+    path: string,
+    body?: Record<string, any>,
+    params?: Record<string, any>
+  ): Promise<T> {
+    return this.request<T>('PATCH', path, params, body);
+  }
+
+  public async delete<T>(
+    path: string,
+    params?: Record<string, any>
+  ): Promise<T> {
     return this.request<T>('DELETE', path, params);
   }
 }

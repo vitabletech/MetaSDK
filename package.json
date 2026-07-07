@@ -1,9 +1,19 @@
 {
-  "name": "meta-sdk",
-  "version": "1.0.0",
+  "name": "@vitabletech/meta-sdk",
+  "version": "1.0.2",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -13,10 +23,39 @@
     "lint:fix": "eslint --fix . --ext .js,.ts",
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "",
+  "description": "A highly scalable, modern, and generic Node.js SDK for interacting with the Meta Graph API (Facebook and Instagram).",
+  "keywords": [
+    "meta",
+    "facebook",
+    "instagram",
+    "graph-api",
+    "sdk",
+    "api",
+    "vitabletech",
+    "meta-sdk",
+    "facebook-sdk",
+    "instagram-sdk",
+    "graph-sdk",
+    "node-sdk",
+    "js-sdk",
+    "ts-sdk"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/vitabletech/Meta-SDK#readme",
+  "bugs": {
+    "url": "https://github.com/vitabletech/Meta-SDK/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitabletech/Meta-SDK.git"
+  },
+  "author": {
+    "name": "Mayank Singh Kushwah",
+    "url": "https://vitabletech.in"
+  },
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.3",

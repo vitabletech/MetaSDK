@@ -3,12 +3,24 @@ import { IHttpClient } from '../client/HttpClient';
 
 export class Paginator<T> {
   public data: T[];
-  
+
   constructor(
     private httpClient: IHttpClient,
     private response: MetaResponse<T[]>
   ) {
     this.data = response.data || [];
+  }
+
+  /**
+   * Controls how this object is serialized to JSON.
+   * Prevents internal dependencies (like httpClient and access token) from leaking,
+   * and prevents duplicating the 'data' array.
+   */
+  public toJSON() {
+    return {
+      data: this.data,
+      paging: this.response.paging,
+    };
   }
 
   /**
@@ -33,11 +45,11 @@ export class Paginator<T> {
     if (!this.hasNextPage) {
       return null;
     }
-    
+
     // Meta API returns full URLs for pagination links
     const nextUrl = this.response.paging!.next!;
     const nextResponse = await this.httpClient.get<MetaResponse<T[]>>(nextUrl);
-    
+
     return new Paginator<T>(this.httpClient, nextResponse);
   }
 
@@ -51,8 +63,9 @@ export class Paginator<T> {
     }
 
     const previousUrl = this.response.paging!.previous!;
-    const previousResponse = await this.httpClient.get<MetaResponse<T[]>>(previousUrl);
-    
+    const previousResponse =
+      await this.httpClient.get<MetaResponse<T[]>>(previousUrl);
+
     return new Paginator<T>(this.httpClient, previousResponse);
   }
 }

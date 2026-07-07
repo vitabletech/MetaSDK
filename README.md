@@ -107,6 +107,23 @@ async function manageInstagramComments() {
 }
 ```
 
+### Generic API Requests
+
+If you need to hit custom endpoints or endpoints not explicitly covered by the SDK's services (like WhatsApp API or Facebook Ads), you can use the generic methods directly on the `client` instance. These methods still benefit from automatic rate-limiting and access token injection!
+
+```typescript
+async function customEndpoint() {
+  // GET request
+  const myProfile = await client.get('/me', { fields: 'id,name,email' });
+
+  // POST request
+  const result = await client.post('/me/feed', { message: 'Hello World!' });
+
+  // DELETE request
+  await client.delete(`/${result.id}`);
+}
+```
+
 ## Error Handling
 
 The SDK exposes a `MetaApiError` class which extends the native `Error` class and encapsulates Graph API specific error data.
@@ -136,6 +153,18 @@ npm run build
 ```
 
 This will compile the TypeScript code via `tsup` into both CommonJS and ESM modules in the `/dist` directory.
+
+## Connect With Vitabletech
+
+This SDK is maintained by **Vitabletech**. Feel free to reach out or follow us on our platforms:
+
+- 🌐 [Website](https://vitabletech.in)
+- 🐙 [GitHub](https://github.com/vitabletech)
+- 📘 [Facebook](https://www.facebook.com/vitabletech)
+- 📸 [Instagram](https://www.instagram.com/vitabletech)
+- 💼 [LinkedIn](https://www.linkedin.com/company/vitabletech)
+- 🎥 [YouTube](https://www.youtube.com/@vitabletech)
+- 📦 [More Packages](https://gbp.vitabletech.in/)
 
 ## License
 
