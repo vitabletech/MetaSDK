@@ -10,6 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tsc --noEmit",
+    "lint:fix": "eslint --fix . --ext .js,.ts",
     "prepare": "husky"
   },
   "keywords": [],
@@ -22,6 +23,8 @@
     "@eslint/eslintrc": "^2.1.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.63.0",
+    "@typescript-eslint/parser": "^8.63.0",
     "eslint": "^8.57.1",
     "eslint-plugin-node": "^11.1.0",
     "husky": "^9.1.7",

@@ -29,7 +29,7 @@ export class RateLimiter {
           usage.total_time || 0
         );
         this.currentUsage = maxUsage;
-        
+
         if (this.currentUsage >= this.threshold) {
           // If we hit threshold, introduce a backoff delay.
           // In a production app you might calculate wait time based on how close to 100% you are.
@@ -38,7 +38,7 @@ export class RateLimiter {
         } else {
           this.delayUntil = 0; // Reset if we drop below threshold
         }
-      } catch (e) {
+      } catch {
         // Ignore JSON parse errors for usage headers
       }
     }
