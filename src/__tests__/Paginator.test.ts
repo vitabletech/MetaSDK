@@ -9,6 +9,8 @@ describe('Paginator', () => {
     mockHttpClient = {
       get: jest.fn(),
       post: jest.fn(),
+      put: jest.fn(),
+      patch: jest.fn(),
       delete: jest.fn(),
     };
   });
@@ -44,7 +46,9 @@ describe('Paginator', () => {
 
     const nextPage = await paginator.nextPage();
 
-    expect(mockHttpClient.get).toHaveBeenCalledWith('https://graph.facebook.com/v20.0/me/posts?after=cursor123');
+    expect(mockHttpClient.get).toHaveBeenCalledWith(
+      'https://graph.facebook.com/v20.0/me/posts?after=cursor123'
+    );
     expect(nextPage).not.toBeNull();
     expect(nextPage!.data[0].id).toBe('2');
     expect(nextPage!.hasNextPage).toBe(false);
